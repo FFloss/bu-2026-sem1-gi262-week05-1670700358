@@ -37,18 +37,26 @@ namespace Assignment
         public int[] AS01_SelectionSortDescending(int[] numbers)
         {
             int n = numbers.Length;
+
             for (int i = 0; i < n - 1; i++)
             {
-                int maxindex = i;
+                int maxIndex = i;
                 for (int j = i + 1; j < n; j++)
                 {
-                    if (numbers[j] > numbers[maxindex])
+                    if (numbers[j] > numbers[maxIndex])
                     {
-                        maxindex = j;
+                        maxIndex = j;
                     }
                 }
-                // Swap the found maximum element with the first element
-                (numbers[i], numbers[maxindex]) = (numbers[maxindex], numbers[i]);
+
+                int temp = numbers[i];
+                numbers[i] = numbers[maxIndex];
+                numbers[maxIndex] = temp;
+            }
+
+            for (int i = 0; i < n; i++)
+            {
+                Console.WriteLine(numbers[i]);
             }
             return numbers;
         }
@@ -60,18 +68,23 @@ namespace Assignment
         public int[] AS02_BubbleSortDescending(int[] numbers)
         {
             int n = numbers.Length;
+
             for (int i = 0; i < n - 1; i++)
             {
-                for (int j = 0; j < n - i - 1; j++)
+                for (int j = 0; j < n - 1 - i; j++)
                 {
                     if (numbers[j] < numbers[j + 1])
                     {
-                        // swap temp and numbers[i]
                         int temp = numbers[j];
                         numbers[j] = numbers[j + 1];
                         numbers[j + 1] = temp;
                     }
                 }
+            }
+
+            for (int i = 0; i < n; i++)
+            {
+                Console.WriteLine(numbers[i]);
             }
             return numbers;
         }
@@ -82,17 +95,23 @@ namespace Assignment
         /// <param name="numbers"></param>
         public int[] AS03_InsertionSortDescending(int[] numbers)
         {
-            int n = numbers.Length;
-            for (int i = 1; i < n; ++i)
+            for (int i = 1; i < numbers.Length; i++)
             {
                 int key = numbers[i];
                 int j = i - 1;
+
                 while (j >= 0 && numbers[j] < key)
                 {
                     numbers[j + 1] = numbers[j];
                     j--;
                 }
+
                 numbers[j + 1] = key;
+            }
+
+            for (int i = 0; i < numbers.Length; i++)
+            {
+                Console.WriteLine(numbers[i]);
             }
             return numbers;
         }
@@ -105,17 +124,25 @@ namespace Assignment
         /// <param name="numbers"></param>
         public int AS04_FindTheSecondLargestNumber(int[] numbers)
         {
+            return 0;
             Array.Sort(numbers);
-            int n = numbers.Length;
-            for (int i = n - 2; i >= 0; i--)
+            Array.Reverse(numbers);
+
+            int largest = numbers[0];
+            int secondLargest = 0;
+
+            for (int i = 1; i < numbers.Length; i++)
             {
-                if (numbers[i] < numbers[n - 1])
+                if (numbers[i] < largest)
                 {
-                    return numbers[i];
+                    secondLargest = numbers[i];
+                    break;
                 }
             }
 
-            return 0;
+            Console.WriteLine(secondLargest);
+
+            return secondLargest;
         }
 
 
